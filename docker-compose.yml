@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    image: toancong/phpup:2
+    depends_on:
+      - db
+    ports:
+      - 11200:80
+    volumes:
+      - .:/var/www/app
+      # this mount will disable xdebug which enabled for dev in default
+      # - ./storage/tools/empty:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    working_dir: /var/www/app
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: user123
